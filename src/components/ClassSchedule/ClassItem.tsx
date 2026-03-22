@@ -1,6 +1,6 @@
-import React from 'react';
-import { html, css } from 'react-strict-dom';
-import type { ClassData } from '@/data/mockData';
+import React from "react";
+import { html, css } from "react-strict-dom";
+import type { ClassData } from "@/data/mockData";
 
 interface ClassItemProps {
   readonly classData: ClassData;
@@ -9,73 +9,76 @@ interface ClassItemProps {
 
 const styles = css.create({
   container: {
-    flexDirection: 'column',
+    flexDirection: "column",
     gap: 12,
   },
   timeRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "baseline",
     gap: 12,
   },
   time: {
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 24,
-    fontWeight: '700',
-    color: '#95aaff',
+    fontWeight: "700",
+    color: "#95aaff",
     letterSpacing: -1,
   },
   duration: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontSize: 10,
-    fontWeight: '400',
-    color: '#adaaaa',
+    fontWeight: "400",
+    color: "#adaaaa",
     letterSpacing: 3,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   className: {
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 28,
-    fontWeight: '900',
-    color: '#ffffff',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    color: "#ffffff",
+    textTransform: "uppercase",
     letterSpacing: -0.5,
   },
   instructor: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontSize: 14,
-    color: '#adaaaa',
+    color: "#adaaaa",
   },
   bottomRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     gap: 16,
   },
   slotsContainer: {
     flex: 1,
   },
   slotsLabel: {
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: "700",
     letterSpacing: 2,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   slotsLabelLow: {
-    color: '#ff7439',
+    color: "#ff7439",
   },
   slotsLabelAvailable: {
-    color: '#adaaaa',
+    color: "#adaaaa",
   },
   slotsLabelFull: {
-    color: '#ff6e84',
+    color: "#ff6e84",
   },
   progressTrack: {
     height: 4,
-    backgroundColor: '#262626',
+    backgroundColor: "#262626",
     borderRadius: 2,
     marginTop: 8,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   progressFill: (percent: number) => ({
     height: 4,
@@ -83,13 +86,13 @@ const styles = css.create({
     width: `${percent}%` as `${number}%`,
   }),
   progressFillLow: {
-    backgroundColor: '#ff7439',
+    backgroundColor: "#ff7439",
   },
   progressFillAvailable: {
-    backgroundColor: '#3766ff',
+    backgroundColor: "#3766ff",
   },
   progressFillFull: {
-    backgroundColor: '#ff6e84',
+    backgroundColor: "#ff6e84",
   },
   bookButton: {
     paddingLeft: 32,
@@ -98,43 +101,40 @@ const styles = css.create({
     paddingBottom: 14,
     borderRadius: 9999,
     borderWidth: 0,
-    backgroundColor: '#95aaff',
+    backgroundColor: "#95aaff",
   },
   bookButtonDisabled: {
-    backgroundColor: '#262626',
+    backgroundColor: "#262626",
   },
   bookButtonText: {
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 11,
-    fontWeight: '700',
+    fontWeight: "700",
     letterSpacing: 2,
-    textTransform: 'uppercase',
-    color: '#000000',
+    textTransform: "uppercase",
+    color: "#000000",
   },
   bookButtonTextDisabled: {
-    color: '#adaaaa',
+    color: "#adaaaa",
     opacity: 0.5,
   },
 });
 
-export const ClassItem: React.FC<ClassItemProps> = ({
-  classData,
-  onBook,
-}) => {
-  const isFull = classData.status === 'full';
-  const isLow = classData.status === 'low';
+export const ClassItem: React.FC<ClassItemProps> = ({ classData, onBook }) => {
+  const isFull = classData.status === "full";
+  const isLow = classData.status === "low";
 
   const slotsLabelStyle = isFull
     ? styles.slotsLabelFull
     : isLow
-    ? styles.slotsLabelLow
-    : styles.slotsLabelAvailable;
+      ? styles.slotsLabelLow
+      : styles.slotsLabelAvailable;
 
   const progressFillStyle = isFull
     ? styles.progressFillFull
     : isLow
-    ? styles.progressFillLow
-    : styles.progressFillAvailable;
+      ? styles.progressFillLow
+      : styles.progressFillAvailable;
 
   return (
     <html.div style={styles.container}>
@@ -169,7 +169,7 @@ export const ClassItem: React.FC<ClassItemProps> = ({
               isFull && styles.bookButtonTextDisabled,
             ]}
           >
-            {isFull ? 'Waitlist' : 'Book'}
+            {isFull ? "Waitlist" : "Book"}
           </html.span>
         </html.button>
       </html.div>

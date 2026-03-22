@@ -1,18 +1,18 @@
-import React from 'react';
-import { html, css } from 'react-strict-dom';
-import { classes, featuredClass } from '@/data/mockData';
-import { useClassSchedule } from '@/hooks/use-class-schedule';
-import { Header } from './Header';
-import { DayFilter } from './DayFilter';
-import { ClassItem } from './ClassItem';
-import { FeaturedCard } from './FeaturedCard';
-import { BottomNav } from './BottomNav';
+import React from "react";
+import { html, css } from "react-strict-dom";
+import { classes, featuredClass } from "@/data/mockData";
+import { useClassSchedule } from "@/hooks/use-class-schedule";
+import { Header } from "./Header";
+import { DayFilter } from "./DayFilter";
+import { ClassItem } from "./ClassItem";
+import { FeaturedCard } from "./FeaturedCard";
+import { BottomNav } from "./BottomNav";
 
 const styles = css.create({
   screen: {
     flex: 1,
-    backgroundColor: '#0e0e0e',
-    minHeight: '100vh',
+    backgroundColor: "#0e0e0e",
+    minHeight: "100vh",
   },
   scrollContent: {
     flex: 1,
@@ -24,11 +24,11 @@ const styles = css.create({
     marginBottom: 48,
   },
   heroTitle: {
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 56,
-    fontWeight: '900',
-    color: '#ffffff',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    color: "#ffffff",
+    textTransform: "uppercase",
     letterSpacing: -2,
     lineHeight: 0.9,
     marginBottom: 16,
@@ -45,7 +45,7 @@ const styles = css.create({
     marginBottom: 48,
   },
   bottomNavWrapper: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
@@ -64,9 +64,7 @@ export const ClassScheduleScreen: React.FC = () => {
       <Header />
       <html.div style={styles.scrollContent}>
         <html.section style={styles.heroSection}>
-          <html.h1 style={styles.heroTitle}>
-            {'Push Your\nLimits.'}
-          </html.h1>
+          <html.h1 style={styles.heroTitle}>{"Push Your\nLimits."}</html.h1>
           <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
         </html.section>
 

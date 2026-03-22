@@ -1,6 +1,6 @@
-import React from 'react';
-import { html, css } from 'react-strict-dom';
-import type { FeaturedClassData } from '@/data/mockData';
+import React from "react";
+import { html, css } from "react-strict-dom";
+import type { FeaturedClassData } from "@/data/mockData";
 
 interface FeaturedCardProps {
   readonly data: FeaturedClassData;
@@ -9,79 +9,81 @@ interface FeaturedCardProps {
 
 const styles = css.create({
   card: {
-    position: 'relative',
+    position: "relative",
     borderRadius: 12,
-    overflow: 'hidden',
+    overflow: "hidden",
     height: 300,
-    backgroundColor: '#20201f',
+    backgroundColor: "#20201f",
   },
   image: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     opacity: 0.5,
   },
   overlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundImage: 'linear-gradient(to top, #0e0e0e, rgba(14,14,14,0.4), transparent)',
+    backgroundImage:
+      "linear-gradient(to top, #0e0e0e, rgba(14,14,14,0.4), transparent)",
   },
   content: {
-    position: 'absolute',
+    display: "flex",
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     padding: 24,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
   },
   textContent: {
     flex: 1,
   },
   tag: {
-    backgroundColor: '#ff7439',
-    color: '#3f1100',
+    backgroundColor: "#ff7439",
+    color: "#3f1100",
     paddingLeft: 12,
     paddingRight: 12,
     paddingTop: 4,
     paddingBottom: 4,
     borderRadius: 2,
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 10,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
-    textTransform: 'uppercase',
-    alignSelf: 'flex-start',
+    textTransform: "uppercase",
+    alignSelf: "flex-start",
     marginBottom: 12,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   title: {
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 44,
-    fontWeight: '900',
-    color: '#ffffff',
-    textTransform: 'uppercase',
+    fontWeight: "900",
+    color: "#ffffff",
+    textTransform: "uppercase",
     letterSpacing: -2,
     lineHeight: 1,
     marginBottom: 8,
   },
   subtitle: {
-    fontFamily: 'Inter',
+    fontFamily: "Inter",
     fontSize: 12,
-    color: '#ffffff',
+    color: "#ffffff",
     letterSpacing: 2,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   reserveButton: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     paddingLeft: 24,
     paddingRight: 24,
     paddingTop: 24,
@@ -91,12 +93,12 @@ const styles = css.create({
     marginLeft: 16,
   },
   reserveText: {
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
     fontSize: 11,
-    fontWeight: '900',
-    color: '#000000',
+    fontWeight: "900",
+    color: "#000000",
     letterSpacing: 2,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
 });
 
@@ -106,11 +108,7 @@ export const FeaturedCard: React.FC<FeaturedCardProps> = ({
 }) => {
   return (
     <html.div style={styles.card}>
-      <html.img
-        src={data.imageUrl}
-        alt={data.imageAlt}
-        style={styles.image}
-      />
+      <html.img src={data.imageUrl} alt={data.imageAlt} style={styles.image} />
       <html.div style={styles.overlay} />
       <html.div style={styles.content}>
         <html.div style={styles.textContent}>

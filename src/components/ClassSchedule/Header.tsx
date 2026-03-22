@@ -1,6 +1,6 @@
-import React from 'react';
-import { html, css } from 'react-strict-dom';
-import { profileImageUrl } from '@/data/mockData';
+import React from "react";
+import { html, css } from "react-strict-dom";
+import { profileImageUrl } from "@/data/mockData";
 
 interface HeaderProps {
   readonly onNotificationPress?: () => void;
@@ -8,18 +8,20 @@ interface HeaderProps {
 
 const styles = css.create({
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingLeft: 24,
     paddingRight: 24,
     paddingTop: 16,
     paddingBottom: 16,
-    backgroundColor: '#0e0e0e',
+    backgroundColor: "#0e0e0e",
   },
   leftGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
   },
   avatar: {
@@ -29,17 +31,17 @@ const styles = css.create({
   },
   brandName: {
     fontSize: 24,
-    fontWeight: '900',
-    fontStyle: 'italic',
-    color: '#95aaff',
+    fontWeight: "900",
+    fontStyle: "italic",
+    color: "#95aaff",
     letterSpacing: -1,
-    fontFamily: 'Space Grotesk',
+    fontFamily: "Space Grotesk",
   },
   notificationButton: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderWidth: 0,
     padding: 4,
-    color: '#95aaff',
+    color: "#95aaff",
     fontSize: 24,
   },
 });
@@ -48,14 +50,13 @@ export const Header: React.FC<HeaderProps> = ({ onNotificationPress }) => {
   return (
     <html.header style={styles.header}>
       <html.div style={styles.leftGroup}>
-        <html.img
-          src={profileImageUrl}
-          alt="Profile"
-          style={styles.avatar}
-        />
+        <html.img src={profileImageUrl} alt="Profile" style={styles.avatar} />
         <html.span style={styles.brandName}>KINETIC</html.span>
       </html.div>
-      <html.button style={styles.notificationButton} onClick={onNotificationPress}>
+      <html.button
+        style={styles.notificationButton}
+        onClick={onNotificationPress}
+      >
         <html.span>🔔</html.span>
       </html.button>
     </html.header>
