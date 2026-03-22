@@ -4,9 +4,8 @@ import "./strict.css";
 import "@expo/metro-runtime";
 
 import * as React from "react";
-import { html } from "react-strict-dom";
 import { LogBox } from "react-native";
-import { PlatformShell } from "../components/PlatformShell";
+import { ClassScheduleScreen } from "../components/ClassSchedule/ClassScheduleScreen";
 
 if (LogBox != null) {
   LogBox.ignoreLogs([
@@ -18,9 +17,7 @@ if (LogBox != null) {
 export default function App() {
   return (
     <React.StrictMode>
-      <PlatformShell>
-        <html.p>Hello</html.p>
-      </PlatformShell>
+      <ClassScheduleScreen />
     </React.StrictMode>
   );
 }

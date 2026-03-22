@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "mcp__stitch__list_projects",
-      "mcp__stitch__list_screens"
+      "mcp__stitch__list_screens",
+      "Skill(react-components)",
+      "mcp__stitch__get_screen"
     ]
   }
 }
