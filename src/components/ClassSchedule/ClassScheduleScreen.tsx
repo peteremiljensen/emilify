@@ -10,12 +10,14 @@ import { BottomNav } from "./BottomNav";
 
 const styles = css.create({
   screen: {
-    flex: 1,
+    display: "flex",
+    flexDirection: "column",
     backgroundColor: "#0e0e0e",
     minHeight: "100vh",
   },
   scrollContent: {
-    flex: 1,
+    display: "flex",
+    flexDirection: "column",
     paddingBottom: 100,
   },
   heroSection: {
@@ -34,6 +36,8 @@ const styles = css.create({
     marginBottom: 16,
   },
   classFeed: {
+    display: "flex",
+    flexDirection: "column",
     paddingLeft: 24,
     paddingRight: 24,
     gap: 48,

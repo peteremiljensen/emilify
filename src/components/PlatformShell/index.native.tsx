@@ -20,8 +20,8 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 export function PlatformShell(props: React.PropsWithChildren<{}>) {
   return (
     <SafeAreaProvider>
-      <StatusBar backgroundColor={colors.background} barStyle="default" />
-      <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
+      <SafeAreaView style={styles.container} edges={["top"]}>
         <ScrollView>{props.children}</ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -30,7 +30,7 @@ export function PlatformShell(props: React.PropsWithChildren<{}>) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // paddingTop: StatusBar.currentHeight,
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
   },
 });

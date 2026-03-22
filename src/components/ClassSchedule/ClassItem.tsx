@@ -9,6 +9,7 @@ interface ClassItemProps {
 
 const styles = css.create({
   container: {
+    display: "flex",
     flexDirection: "column",
     gap: 12,
   },
