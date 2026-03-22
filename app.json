@@ -6,10 +6,12 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "emilify",
-    "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.anonymous.emilify"
     },
+    "backgroundColor": "#0e0e0e",
+    "userInterfaceStyle": "dark",
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -17,7 +19,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.emilify"
     },
     "web": {
       "output": "static",
@@ -25,6 +28,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-system-ui",
       [
         "expo-splash-screen",
         {

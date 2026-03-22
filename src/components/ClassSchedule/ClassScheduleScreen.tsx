@@ -65,7 +65,6 @@ export const ClassScheduleScreen: React.FC = () => {
 
   return (
     <html.div style={styles.screen}>
-      <Header />
       <html.div style={styles.scrollContent}>
         <html.section style={styles.heroSection}>
           <html.h1 style={styles.heroTitle}>{"Push Your\nLimits."}</html.h1>

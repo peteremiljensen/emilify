@@ -16,21 +16,25 @@ import {
   View,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { Header } from "../ClassSchedule/Header";
 
 export function PlatformShell(props: React.PropsWithChildren<{}>) {
   return (
-    <SafeAreaProvider>
+    <>
       <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-      <SafeAreaView style={styles.container} edges={["top"]}>
-        <ScrollView>{props.children}</ScrollView>
-      </SafeAreaView>
-    </SafeAreaProvider>
+      {/* <SafeAreaProvider> */}
+      {/* // <SafeAreaView style={styles.container} edges={["top", "bottom"]}> */}
+      <Header />
+      <ScrollView>{props.children}</ScrollView>
+      {/* </SafeAreaView> */}
+      {/* </SafeAreaProvider> */}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
+    // paddingTop: StatusBar.currentHeight,
   },
 });

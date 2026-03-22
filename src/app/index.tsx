@@ -1,12 +1,12 @@
 // Required for CSS to work on Expo Web.
+import App from "@/components/App";
 import "./strict.css";
 // Required for Fast Refresh to work on Expo Web
 import "@expo/metro-runtime";
 
-import * as React from "react";
+import { registerRootComponent } from "expo";
+
 import { LogBox } from "react-native";
-import { ClassScheduleScreen } from "../components/ClassSchedule/ClassScheduleScreen";
-import { PlatformShell } from "@/components/PlatformShell/index.native";
 
 if (LogBox != null) {
   LogBox.ignoreLogs([
@@ -15,12 +15,4 @@ if (LogBox != null) {
   ]);
 }
 
-export default function App() {
-  return (
-    <React.StrictMode>
-      <PlatformShell>
-        <ClassScheduleScreen />
-      </PlatformShell>
-    </React.StrictMode>
-  );
-}
+registerRootComponent(App);
