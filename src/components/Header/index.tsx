@@ -14,7 +14,7 @@ const styles = css.create({
     alignItems: "center",
     paddingLeft: 24,
     paddingRight: 24,
-    paddingTop: 16,
+    paddingTop: 0,
     paddingBottom: 16,
     backgroundColor: "#0e0e0e",
   },

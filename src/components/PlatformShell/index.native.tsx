@@ -7,28 +7,16 @@
 
 import { colors } from "@/tokens";
 import * as React from "react";
-import {
-  Platform,
-  ScrollView,
-  StyleSheet,
-  StatusBar,
-  Text,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { Header } from "../ClassSchedule/Header";
 
 export function PlatformShell(props: React.PropsWithChildren<{}>) {
   return (
-    <>
-      <StatusBar backgroundColor={colors.background} barStyle="light-content" />
-      {/* <SafeAreaProvider> */}
-      {/* // <SafeAreaView style={styles.container} edges={["top", "bottom"]}> */}
-      <Header />
-      <ScrollView>{props.children}</ScrollView>
-      {/* </SafeAreaView> */}
-      {/* </SafeAreaProvider> */}
-    </>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container} edges={["top", "bottom"]}>
+        {props.children}
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
