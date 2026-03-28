@@ -8,7 +8,7 @@
     "scheme": "emilify",
     "ios": {
       "icon": "./assets/expo.icon",
-      "bundleIdentifier": "com.anonymous.emilify"
+      "bundleIdentifier": "com.nikpet.emilify"
     },
     "backgroundColor": "#0e0e0e",
     "userInterfaceStyle": "dark",
@@ -28,6 +28,17 @@
     },
     "plugins": [
       "expo-system-ui",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf",
+            "node_modules/@expo-google-fonts/inter/900Black_Italic/Inter_900Black_Italic.ttf",
+            "node_modules/@expo-google-fonts/space-grotesk/700Bold/SpaceGrotesk_700Bold.ttf",
+            "node_modules/@expo-google-fonts/material-symbols/400Regular/MaterialSymbols_400Regular.ttf"
+          ]
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
@@ -38,7 +49,8 @@
             "imageWidth": 76
           }
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -6,9 +6,5 @@ import { Stack } from "expo-router";
 // import { registerRootComponent } from "expo";
 
 export default function App() {
-  return (
-    <>
-      <ClassScheduleScreen />
-    </>
-  );
+  return <ClassScheduleScreen />;
 }

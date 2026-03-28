@@ -119,6 +119,11 @@ const styles = css.create({
     color: "#adaaaa",
     opacity: 0.5,
   },
+  icon: {
+    fontSize: 16,
+    fontFamily: "Material Symbols",
+    fontWeight: 400,
+  },
 });
 
 export const ClassItem: React.FC<ClassItemProps> = ({ classData, onBook }) => {
@@ -144,7 +149,9 @@ export const ClassItem: React.FC<ClassItemProps> = ({ classData, onBook }) => {
         <html.span style={styles.duration}>{classData.duration}</html.span>
       </html.div>
       <html.h2 style={styles.className}>{classData.name}</html.h2>
-      <html.p style={styles.instructor}>👤 {classData.instructor}</html.p>
+      <html.p style={styles.instructor}>
+        <html.span style={styles.icon}>person</html.span> {classData.instructor}
+      </html.p>
       <html.div style={styles.bottomRow}>
         <html.div style={styles.slotsContainer}>
           <html.span style={[styles.slotsLabel, slotsLabelStyle]}>

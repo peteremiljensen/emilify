@@ -14,7 +14,7 @@ export default function Layout() {
     <ThemeProvider
       value={{
         ...DefaultTheme,
-        colors: { ...DefaultTheme.colors, background: colors.background },
+        colors: { ...DefaultTheme.colors, background: "#0e0e0e" },
       }}
     >
       <React.StrictMode>

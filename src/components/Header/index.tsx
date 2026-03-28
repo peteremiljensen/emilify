@@ -35,7 +35,7 @@ const styles = css.create({
     fontStyle: "italic",
     color: "#95aaff",
     letterSpacing: -1,
-    fontFamily: "Space Grotesk",
+    fontFamily: "Inter",
   },
   notificationButton: {
     backgroundColor: "transparent",
@@ -43,6 +43,10 @@ const styles = css.create({
     padding: 4,
     color: "#95aaff",
     fontSize: 24,
+  },
+  icon: {
+    fontFamily: "Material Symbols",
+    fontWeight: 400,
   },
 });
 
@@ -57,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({ onNotificationPress }) => {
         style={styles.notificationButton}
         onClick={onNotificationPress}
       >
-        <html.span>🔔</html.span>
+        <html.span style={styles.icon}>notifications</html.span>
       </html.button>
     </html.header>
   );
