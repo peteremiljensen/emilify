@@ -2,11 +2,10 @@ import React from "react";
 import { html, css } from "react-strict-dom";
 import { classes, featuredClass } from "@/data/mockData";
 import { useClassSchedule } from "@/hooks/use-class-schedule";
-import { Header } from "./Header";
 import { DayFilter } from "./DayFilter";
 import { ClassItem } from "./ClassItem";
 import { FeaturedCard } from "./FeaturedCard";
-import { BottomNav } from "./BottomNav";
+// import { BottomNav } from "./BottomNav";
 
 const styles = css.create({
   screen: {
@@ -88,9 +87,9 @@ export const ClassScheduleScreen: React.FC = () => {
         </html.div>
       </html.div>
 
-      <html.div style={styles.bottomNavWrapper}>
-        <BottomNav onNavigate={onNavigate} />
-      </html.div>
+      {/* <html.div style={styles.bottomNavWrapper}> */}
+      {/* <BottomNav onNavigate={onNavigate} /> */}
+      {/* </html.div> */}
     </html.div>
   );
 };

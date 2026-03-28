@@ -7,10 +7,8 @@ import { Stack } from "expo-router";
 
 export default function App() {
   return (
-    <React.StrictMode>
-      <Stack.Screen options={{ headerShown: false }} />
-
+    <>
       <ClassScheduleScreen />
-    </React.StrictMode>
+    </>
   );
 }

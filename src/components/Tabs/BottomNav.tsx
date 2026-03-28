@@ -60,11 +60,11 @@ const styles = css.create({
   },
 });
 
-export const BottomNav: React.FC<BottomNavProps> = ({ onNavigate }) => {
+export const TabList: React.FC<BottomNavProps> = ({ onNavigate }) => {
   return (
     <html.nav style={styles.nav}>
       {navItems.map((item) => (
-        <html.button
+        <html.a
           key={item.id}
           style={[styles.navItem, item.active && styles.navItemActive]}
           onClick={() => onNavigate?.(item.id)}
@@ -85,7 +85,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ onNavigate }) => {
           >
             {item.label}
           </html.span>
-        </html.button>
+        </html.a>
       ))}
     </html.nav>
   );
