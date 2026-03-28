@@ -6,14 +6,25 @@ import "@expo/metro-runtime";
 
 import { Slot, Stack } from "expo-router";
 import { PlatformShell } from "@/components/PlatformShell";
+import { ThemeProvider, DefaultTheme } from "@react-navigation/native";
+import { colors } from "@/tokens.css";
 
 export default function Layout() {
   return (
-    <React.StrictMode>
-      <PlatformShell>
-        <Stack />
-      </PlatformShell>
-    </React.StrictMode>
+    <ThemeProvider
+      value={{
+        ...DefaultTheme,
+        colors: { ...DefaultTheme.colors, background: colors.background },
+      }}
+    >
+      <React.StrictMode>
+        <PlatformShell>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          </Stack>
+        </PlatformShell>
+      </React.StrictMode>
+    </ThemeProvider>
   );
 }
 

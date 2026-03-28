@@ -98,11 +98,11 @@ export const navItems: readonly NavItem[] = [
     active: true,
   },
   { id: "plans", href: "/plans", icon: "style", label: "Plans", active: false },
-  {
-    id: "profile",
-    href: "/profile",
-    icon: "person",
-    label: "Profile",
-    active: false,
-  },
+  // {
+  //   id: "profile",
+  //   href: "/profile",
+  //   icon: "person",
+  //   label: "Profile",
+  //   active: false,
+  // },
 ];

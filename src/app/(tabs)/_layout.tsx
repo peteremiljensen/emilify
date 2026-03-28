@@ -28,39 +28,29 @@ import { navItems } from "@/data/mockData";
 
 export default function Layout() {
   const insets = useSafeAreaInsets();
-  // const path = usePathname();
+  const path = usePathname();
   // console.log(path);
   return (
     <>
       <Header />
       <Tabs>
-        <ScrollView style={styles.scroll}>
-          <TabSlot />
-        </ScrollView>
+        <TabSlot />
+        <html.nav style={styles.nav}>
+          {navItems.map(({ id, icon, label, href }) => (
+            <Button
+              key={id}
+              label={label}
+              icon={icon}
+              href={href}
+              active={href === path}
+            />
+          ))}
+        </html.nav>
         <TabList>
-          <TabTrigger name="home" href="/">
-            <html.div>home</html.div>
-          </TabTrigger>
-          <TabTrigger name="classes" href="/classes">
-            <html.div>classes</html.div>
-          </TabTrigger>
+          {navItems.map(({ href, id }) => (
+            <TabTrigger key={id} name={id} href={href} />
+          ))}
         </TabList>
-        {/* <html.nav style={styles.nav}> */}
-        {/*   {navItems.map(({ id, icon, label, href }) => ( */}
-        {/*     <Button */}
-        {/*       key={id} */}
-        {/*       label={label} */}
-        {/*       icon={icon} */}
-        {/*       href={href} */}
-        {/*       active={href === path} */}
-        {/*     /> */}
-        {/*   ))} */}
-        {/* </html.nav> */}
-        {/* <TabList> */}
-        {/*   {navItems.map(({ href, id }) => ( */}
-        {/*     <TabTrigger key={id} name={id} href={href} /> */}
-        {/*   ))} */}
-        {/* </TabList> */}
       </Tabs>
       <View
         style={{ ...styles2.safeAreaBlockBottom, paddingBottom: insets.bottom }}
@@ -108,12 +98,12 @@ const styles = css.create({
   nav: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    paddingLeft: 24,
-    paddingRight: 24,
-    paddingTop: 24,
-    // paddingBottom: 24,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 20,
+    // paddingBottom: 8,
     backgroundColor: "#131313FF",
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
@@ -125,7 +115,10 @@ const styles = css.create({
     justifyContent: "center",
     backgroundColor: "transparent",
     borderWidth: 0,
-    // padding: 8,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 8,
+    paddingBottom: 8,
     opacity: 0.6,
   },
   navItemActive: {
