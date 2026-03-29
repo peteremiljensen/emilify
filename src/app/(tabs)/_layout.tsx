@@ -4,7 +4,7 @@ import { BlurTargetView, BlurView } from "expo-blur";
 import { Href, usePathname, useRouter } from "expo-router";
 import { TabList, Tabs, TabSlot, TabTrigger } from "expo-router/ui";
 import { useEffect, useRef } from "react";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Screen } from "react-native-screens";
 import { css, html } from "react-strict-dom";
@@ -129,18 +129,57 @@ interface ButtonProps {
 }
 const Button: React.FC<ButtonProps> = ({ icon, href, label, active }) => {
   const { push } = useRouter();
+  const scale = useRef(new Animated.Value(active ? 1 : 0.95)).current;
+  const opacity = useRef(new Animated.Value(active ? 1 : 0.6)).current;
+  const bgOpacity = useRef(new Animated.Value(active ? 1 : 0)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.spring(scale, {
+        toValue: active ? 1 : 0.95,
+        friction: 8,
+        tension: 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacity, {
+        toValue: active ? 1 : 0.6,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(bgOpacity, {
+        toValue: active ? 1 : 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [active, scale, opacity, bgOpacity]);
+
+  const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
   return (
-    <html.button
-      style={[styles.navItem, active && styles.navItemActive]}
-      onClick={() => push(href)}
+    <AnimatedPressable
+      onPress={() => push(href)}
+      style={[
+        styles2.navItemBase,
+        { transform: [{ scale }], opacity },
+      ]}
     >
-      <html.span style={[styles.navIcon, active && styles.navIconActive]}>
-        {icon}
-      </html.span>
-      <html.span style={[styles.navLabel, active && styles.navLabelActive]}>
-        {label}
-      </html.span>
-    </html.button>
+      <Animated.View
+        style={[styles2.navItemBg, { opacity: bgOpacity }]}
+      />
+      <View style={styles2.navItemContent}>
+        <html.span
+          style={[styles.navIcon, active && styles.navIconActive]}
+        >
+          {icon}
+        </html.span>
+        <html.span
+          style={[styles.navLabel, active && styles.navLabelActive]}
+        >
+          {label}
+        </html.span>
+      </View>
+    </AnimatedPressable>
   );
 };
 
@@ -187,6 +226,25 @@ const styles2 = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  navItemBase: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 30,
+    paddingVertical: 10,
+  },
+  navItemBg: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 0,
+    backgroundColor: "#95aaff",
+    borderRadius: 9999,
+    shadowColor: "#95aaff",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.6,
+    shadowRadius: 20,
+  },
+  navItemContent: {
+    zIndex: 1,
+  },
   text: {
     fontSize: 24,
     fontWeight: "600",
@@ -229,30 +287,6 @@ const styles = css.create({
     paddingTop: insetBottom - 10,
     // paddingTop: paddingBottom,
   }),
-  navItem: {
-    zIndex: 99,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-    borderWidth: 0,
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 10,
-    paddingBottom: 10,
-    opacity: 0.6,
-  },
-  navItemActive: {
-    backgroundColor: "#95aaff",
-    borderRadius: 9999,
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 10,
-    paddingBottom: 10,
-    opacity: 1,
-    boxShadow: "0 0 50px -11px #95aaff",
-  },
   navIcon: {
     zIndex: 99,
     fontSize: 22,
