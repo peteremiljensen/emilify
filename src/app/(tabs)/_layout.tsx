@@ -3,22 +3,77 @@ import { navItems } from "@/data/mockData";
 import { BlurTargetView, BlurView } from "expo-blur";
 import { Href, usePathname, useRouter } from "expo-router";
 import { TabList, Tabs, TabSlot, TabTrigger } from "expo-router/ui";
-import { useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { useEffect, useRef } from "react";
+import { Animated, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Screen } from "react-native-screens";
 import { css, html } from "react-strict-dom";
+
+function AnimatedTabScreen({
+  children,
+  isFocused,
+}: {
+  children: React.ReactNode;
+  isFocused: boolean;
+}) {
+  const opacity = useRef(new Animated.Value(isFocused ? 1 : 0)).current;
+
+  useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: isFocused ? 1 : 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
+  }, [isFocused, opacity]);
+
+  return (
+    <Animated.View style={[{ flex: 1, opacity }]}>
+      {children}
+    </Animated.View>
+  );
+}
 
 export default function Layout() {
   const insets = useSafeAreaInsets();
   const path = usePathname();
   const targetRef = useRef<View | null>(null);
-  // console.log(path);
 
   return (
     <>
       <Tabs>
         <BlurTargetView ref={targetRef} style={styles2.background}>
-          <TabSlot />
+          <TabSlot
+            renderFn={(
+              descriptor,
+              { isFocused, loaded, detachInactiveScreens },
+            ) => {
+              const {
+                lazy = true,
+                unmountOnBlur,
+                freezeOnBlur,
+              } = descriptor.options;
+
+              if (unmountOnBlur && !isFocused) return null;
+              if (lazy && !loaded && !isFocused) return null;
+
+              return (
+                <Screen
+                  key={descriptor.route.key}
+                  enabled={detachInactiveScreens}
+                  activityState={isFocused ? 2 : 0}
+                  freezeOnBlur={freezeOnBlur}
+                  style={[
+                    styles2.screen,
+                    isFocused ? styles2.focused : styles2.unfocused,
+                  ]}
+                >
+                  <AnimatedTabScreen isFocused={isFocused}>
+                    {descriptor.render()}
+                  </AnimatedTabScreen>
+                </Screen>
+              );
+            }}
+          />
         </BlurTargetView>
 
         <BlurView
@@ -112,6 +167,25 @@ const styles2 = StyleSheet.create({
     bottom: 0,
     borderRadius: 24,
     overflow: "hidden",
+  },
+  screen: {
+    flex: 1,
+    position: "relative",
+    height: "100%",
+  },
+  focused: {
+    zIndex: 1,
+    display: "flex",
+    flexShrink: 0,
+    flexGrow: 1,
+  },
+  unfocused: {
+    zIndex: 0,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   text: {
     fontSize: 24,
