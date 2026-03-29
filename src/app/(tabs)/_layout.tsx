@@ -3,14 +3,10 @@ import { navItems } from "@/data/mockData";
 import { BlurTargetView, BlurView } from "expo-blur";
 import { Href, usePathname, useRouter } from "expo-router";
 import { TabList, Tabs, TabSlot, TabTrigger } from "expo-router/ui";
+import { useRef } from "react";
+import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { css, html } from "react-strict-dom";
-import { Text, StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-} from "react-native-reanimated";
-import { useRef } from "react";
 
 export default function Layout() {
   const insets = useSafeAreaInsets();
