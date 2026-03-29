@@ -21,7 +21,7 @@ function AnimatedTabScreen({
   useEffect(() => {
     Animated.timing(opacity, {
       toValue: isFocused ? 1 : 0,
-      duration: 250,
+      duration: 120,
       useNativeDriver: true,
     }).start();
   }, [isFocused, opacity]);
@@ -137,18 +137,18 @@ const Button: React.FC<ButtonProps> = ({ icon, href, label, active }) => {
     Animated.parallel([
       Animated.spring(scale, {
         toValue: active ? 1 : 0.95,
-        friction: 8,
-        tension: 100,
+        friction: 6,
+        tension: 200,
         useNativeDriver: true,
       }),
       Animated.timing(opacity, {
         toValue: active ? 1 : 0.6,
-        duration: 200,
+        duration: 100,
         useNativeDriver: true,
       }),
       Animated.timing(bgOpacity, {
         toValue: active ? 1 : 0,
-        duration: 200,
+        duration: 100,
         useNativeDriver: true,
       }),
     ]).start();
