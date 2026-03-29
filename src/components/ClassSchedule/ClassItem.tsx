@@ -34,6 +34,7 @@ const styles = css.create({
     letterSpacing: 3,
     textTransform: "uppercase",
   },
+  classRow: {},
   className: {
     fontFamily: "Space Grotesk",
     fontSize: 28,
@@ -43,6 +44,10 @@ const styles = css.create({
     letterSpacing: -0.5,
   },
   instructor: {
+    display: "flex",
+    gap: 4,
+    flexDirection: "row",
+    alignItems: "center",
     fontFamily: "Inter",
     fontSize: 14,
     color: "#adaaaa",
@@ -148,10 +153,13 @@ export const ClassItem: React.FC<ClassItemProps> = ({ classData, onBook }) => {
         <html.span style={styles.time}>{classData.time}</html.span>
         <html.span style={styles.duration}>{classData.duration}</html.span>
       </html.div>
-      <html.h2 style={styles.className}>{classData.name}</html.h2>
-      <html.p style={styles.instructor}>
-        <html.span style={styles.icon}>person</html.span> {classData.instructor}
-      </html.p>
+      <html.div style={styles.classRow}>
+        <html.h2 style={styles.className}>{classData.name}</html.h2>
+        <html.div style={styles.instructor}>
+          <html.div style={styles.icon}>person</html.div>
+          <html.div>{classData.instructor}</html.div>
+        </html.div>
+      </html.div>
       <html.div style={styles.bottomRow}>
         <html.div style={styles.slotsContainer}>
           <html.span style={[styles.slotsLabel, slotsLabelStyle]}>
