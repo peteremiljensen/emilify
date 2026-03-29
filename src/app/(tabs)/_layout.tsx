@@ -3,6 +3,10 @@ import { navItems } from "@/data/mockData";
 import { BlurTargetView, BlurView } from "expo-blur";
 import { Href, usePathname, useRouter } from "expo-router";
 import { TabList, Tabs, TabSlot, TabTrigger } from "expo-router/ui";
+import {
+  HeaderHeightProvider,
+  useHeaderHeight,
+} from "@/contexts/HeaderHeightContext";
 import { useEffect, useRef } from "react";
 import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -27,16 +31,23 @@ function AnimatedTabScreen({
   }, [isFocused, opacity]);
 
   return (
-    <Animated.View style={[{ flex: 1, opacity }]}>
-      {children}
-    </Animated.View>
+    <Animated.View style={[{ flex: 1, opacity }]}>{children}</Animated.View>
   );
 }
 
 export default function Layout() {
+  return (
+    <HeaderHeightProvider>
+      <TabsContent />
+    </HeaderHeightProvider>
+  );
+}
+
+function TabsContent() {
   const insets = useSafeAreaInsets();
   const path = usePathname();
   const targetRef = useRef<View | null>(null);
+  const { onHeaderLayout } = useHeaderHeight();
 
   return (
     <>
@@ -77,6 +88,7 @@ export default function Layout() {
         </BlurTargetView>
 
         <BlurView
+          onLayout={onHeaderLayout}
           blurTarget={targetRef}
           blurMethod="dimezisBlurView"
           intensity={100}
@@ -159,23 +171,14 @@ const Button: React.FC<ButtonProps> = ({ icon, href, label, active }) => {
   return (
     <AnimatedPressable
       onPress={() => push(href)}
-      style={[
-        styles2.navItemBase,
-        { transform: [{ scale }], opacity },
-      ]}
+      style={[styles2.navItemBase, { transform: [{ scale }], opacity }]}
     >
-      <Animated.View
-        style={[styles2.navItemBg, { opacity: bgOpacity }]}
-      />
+      <Animated.View style={[styles2.navItemBg, { opacity: bgOpacity }]} />
       <View style={styles2.navItemContent}>
-        <html.span
-          style={[styles.navIcon, active && styles.navIconActive]}
-        >
+        <html.span style={[styles.navIcon, active && styles.navIconActive]}>
           {icon}
         </html.span>
-        <html.span
-          style={[styles.navLabel, active && styles.navLabelActive]}
-        >
+        <html.span style={[styles.navLabel, active && styles.navLabelActive]}>
           {label}
         </html.span>
       </View>
@@ -211,6 +214,7 @@ const styles2 = StyleSheet.create({
     flex: 1,
     position: "relative",
     height: "100%",
+    width: "100%",
   },
   focused: {
     zIndex: 1,
@@ -238,9 +242,9 @@ const styles2 = StyleSheet.create({
     backgroundColor: "#95aaff",
     borderRadius: 9999,
     shadowColor: "#95aaff",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 20,
+    // shadowOffset: { width: 0, height: 0 },
+    // shadowOpacity: 0.6,
+    // shadowRadius: 10,
   },
   navItemContent: {
     zIndex: 1,

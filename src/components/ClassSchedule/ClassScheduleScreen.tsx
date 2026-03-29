@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { html, css } from "react-strict-dom";
 import { classes, featuredClass } from "@/data/mockData";
 import { useClassSchedule } from "@/hooks/use-class-schedule";
 import { DayFilter } from "./DayFilter";
 import { ClassItem } from "./ClassItem";
 import { FeaturedCard } from "./FeaturedCard";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { colors } from "@/tokens.css";
+import { useHeaderHeight } from "@/contexts/HeaderHeightContext";
 // import { BottomNav } from "./BottomNav";
 
 const styles = css.create({
@@ -15,17 +16,25 @@ const styles = css.create({
     flexDirection: "column",
     backgroundColor: "#0e0e0e",
     minHeight: "100vh",
+    width: "100vw",
   },
-  scrollContent: {
+  scrollContent: (heroHeight: number) => ({
     display: "flex",
     flexDirection: "column",
+    marginTop: heroHeight + 20,
     paddingBottom: 100,
-  },
-  heroSection: {
-    paddingLeft: 24,
+  }),
+  heroSection: (headerHeight: number) => ({
+    position: "absolute",
+    width: "100%",
+    // height: 100,
+    zIndex: 99,
+    // backgroundColor: "#0e0e0e",
+    top: headerHeight + 10,
+    overflow: "visible",
+    paddingLeft: 0,
     paddingRight: 24,
-    marginBottom: 48,
-  },
+  }),
   heroTitle: {
     fontFamily: "Space Grotesk",
     fontSize: 56,
@@ -58,42 +67,55 @@ const styles = css.create({
 });
 
 export const ClassScheduleScreen: React.FC = () => {
-  const { selectedDay, onDayPress, onBook, onReserve, onNavigate } =
-    useClassSchedule();
+  const { selectedDay, onDayPress, onBook, onReserve } = useClassSchedule();
+  const { headerHeight } = useHeaderHeight();
 
   const firstHalf = classes.slice(0, 2);
   const secondHalf = classes.slice(2);
 
+  const [heroHeight, setHeroHeight] = useState(0);
+  console.log("heroHeight", heroHeight);
+
   return (
     // <ScrollView style={{ backgroundColor: colors.background }}>
-    <html.div style={styles.screen}>
-      <html.div style={styles.scrollContent}>
-        <html.section style={styles.heroSection}>
-          <html.h1 style={styles.heroTitle}>{"Push Your\nLimits."}</html.h1>
+    <>
+      <html.section style={styles.heroSection(headerHeight)}>
+        <View
+          onLayout={(e) => {
+            setHeroHeight(e.nativeEvent.layout.height);
+          }}
+        >
           <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
-        </html.section>
+        </View>
+      </html.section>
+      <ScrollView
+        style={{ paddingTop: headerHeight, width: "100%" }}
+        showsVerticalScrollIndicator={false}
+      >
+        <html.div style={styles.screen}>
+          <html.div style={styles.scrollContent(heroHeight)}>
+            <html.div style={styles.classFeed}>
+              {firstHalf.map((cls) => (
+                <ClassItem key={cls.id} classData={cls} onBook={onBook} />
+              ))}
+            </html.div>
 
-        <html.div style={styles.classFeed}>
-          {firstHalf.map((cls) => (
-            <ClassItem key={cls.id} classData={cls} onBook={onBook} />
-          ))}
+            <html.div style={styles.featuredWrapper}>
+              <FeaturedCard data={featuredClass} onReserve={onReserve} />
+            </html.div>
+
+            <html.div style={styles.classFeed}>
+              {secondHalf.map((cls) => (
+                <ClassItem key={cls.id} classData={cls} onBook={onBook} />
+              ))}
+            </html.div>
+          </html.div>
+
+          {/* <html.div style={styles.bottomNavWrapper}> */}
+          {/* <BottomNav onNavigate={onNavigate} /> */}
+          {/* </html.div> */}
         </html.div>
-
-        <html.div style={styles.featuredWrapper}>
-          <FeaturedCard data={featuredClass} onReserve={onReserve} />
-        </html.div>
-
-        <html.div style={styles.classFeed}>
-          {secondHalf.map((cls) => (
-            <ClassItem key={cls.id} classData={cls} onBook={onBook} />
-          ))}
-        </html.div>
-      </html.div>
-
-      {/* <html.div style={styles.bottomNavWrapper}> */}
-      {/* <BottomNav onNavigate={onNavigate} /> */}
-      {/* </html.div> */}
-    </html.div>
-    // </ScrollView>
+      </ScrollView>
+    </>
   );
 };

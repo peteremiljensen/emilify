@@ -11,13 +11,13 @@ const styles = css.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    gap: 12,
+    gap: 14,
   },
   timeRow: {
     display: "flex",
     flexDirection: "row",
     alignItems: "baseline",
-    gap: 12,
+    gap: 14,
   },
   time: {
     fontFamily: "Space Grotesk",
@@ -64,6 +64,7 @@ const styles = css.create({
     flex: 1,
   },
   slotsLabel: {
+    lineHeight: 1,
     fontFamily: "Space Grotesk",
     fontSize: 11,
     fontWeight: "700",

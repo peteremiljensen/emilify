@@ -13,6 +13,7 @@ const styles = css.create({
     display: "flex",
     flexDirection: "row",
     gap: 12,
+    paddingLeft: 24,
     paddingTop: 8,
     paddingBottom: 8,
   },
@@ -46,7 +47,7 @@ export const DayFilter: React.FC<DayFilterProps> = ({
   onDayPress,
 }) => {
   return (
-    <ScrollView horizontal={true}>
+    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
       <html.div style={styles.container}>
         {dayFilters.map((day) => {
           const isActive = day === selectedDay;
