@@ -16,7 +16,6 @@ const styles = css.create({
     paddingRight: 24,
     paddingTop: 0,
     paddingBottom: 16,
-    backgroundColor: "#0e0e0e",
   },
   leftGroup: {
     display: "flex",

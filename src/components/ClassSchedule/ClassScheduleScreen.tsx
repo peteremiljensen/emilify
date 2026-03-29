@@ -65,35 +65,35 @@ export const ClassScheduleScreen: React.FC = () => {
   const secondHalf = classes.slice(2);
 
   return (
-    <ScrollView style={{ backgroundColor: colors.background }}>
-      <html.div style={styles.screen}>
-        <html.div style={styles.scrollContent}>
-          <html.section style={styles.heroSection}>
-            <html.h1 style={styles.heroTitle}>{"Push Your\nLimits."}</html.h1>
-            <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
-          </html.section>
+    // <ScrollView style={{ backgroundColor: colors.background }}>
+    <html.div style={styles.screen}>
+      <html.div style={styles.scrollContent}>
+        <html.section style={styles.heroSection}>
+          <html.h1 style={styles.heroTitle}>{"Push Your\nLimits."}</html.h1>
+          <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
+        </html.section>
 
-          <html.div style={styles.classFeed}>
-            {firstHalf.map((cls) => (
-              <ClassItem key={cls.id} classData={cls} onBook={onBook} />
-            ))}
-          </html.div>
-
-          <html.div style={styles.featuredWrapper}>
-            <FeaturedCard data={featuredClass} onReserve={onReserve} />
-          </html.div>
-
-          <html.div style={styles.classFeed}>
-            {secondHalf.map((cls) => (
-              <ClassItem key={cls.id} classData={cls} onBook={onBook} />
-            ))}
-          </html.div>
+        <html.div style={styles.classFeed}>
+          {firstHalf.map((cls) => (
+            <ClassItem key={cls.id} classData={cls} onBook={onBook} />
+          ))}
         </html.div>
 
-        {/* <html.div style={styles.bottomNavWrapper}> */}
-        {/* <BottomNav onNavigate={onNavigate} /> */}
-        {/* </html.div> */}
+        <html.div style={styles.featuredWrapper}>
+          <FeaturedCard data={featuredClass} onReserve={onReserve} />
+        </html.div>
+
+        <html.div style={styles.classFeed}>
+          {secondHalf.map((cls) => (
+            <ClassItem key={cls.id} classData={cls} onBook={onBook} />
+          ))}
+        </html.div>
       </html.div>
-    </ScrollView>
+
+      {/* <html.div style={styles.bottomNavWrapper}> */}
+      {/* <BottomNav onNavigate={onNavigate} /> */}
+      {/* </html.div> */}
+    </html.div>
+    // </ScrollView>
   );
 };

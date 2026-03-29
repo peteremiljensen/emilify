@@ -5,7 +5,11 @@ import { Href, usePathname, useRouter } from "expo-router";
 import { TabList, Tabs, TabSlot, TabTrigger } from "expo-router/ui";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { css, html } from "react-strict-dom";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from "react-native-reanimated";
 import { useRef } from "react";
 
 export default function Layout() {
@@ -13,18 +17,34 @@ export default function Layout() {
   const path = usePathname();
   const targetRef = useRef<View | null>(null);
   // console.log(path);
+
   return (
     <>
-      <Header />
       <Tabs>
         <BlurTargetView ref={targetRef} style={styles2.background}>
           <TabSlot />
         </BlurTargetView>
+
         <BlurView
           blurTarget={targetRef}
           blurMethod="dimezisBlurView"
           intensity={100}
-          style={styles2.blurContainer}
+          style={styles2.blurContainerMenu}
+          tint="dark"
+        >
+          <View>
+            <html.div style={styles.headerWrapper(insets.top)}>
+              <Header />
+            </html.div>
+          </View>
+        </BlurView>
+
+        <BlurView
+          blurTarget={targetRef}
+          blurMethod="dimezisBlurView"
+          intensity={100}
+          style={styles2.blurContainerTab}
+          tint="dark"
         >
           <View>
             <html.nav style={styles.nav(insets.bottom)}>
@@ -79,7 +99,16 @@ const styles2 = StyleSheet.create({
     flexWrap: "wrap",
     ...StyleSheet.absoluteFill,
   },
-  blurContainer: {
+  blurContainerMenu: {
+    position: "absolute",
+    zIndex: 99,
+    // height: 2000,
+    width: "100%",
+
+    top: 0,
+    overflow: "hidden",
+  },
+  blurContainerTab: {
     position: "absolute",
     zIndex: 1,
     // height: 200,
@@ -98,7 +127,18 @@ const styles = css.create({
   // navWrapper: {
   //       posi
   //   },
-  nav: (paddingBottom: number) => ({
+  // tabSlotWrapper: {
+  //   top: 0,
+  //   zIndex: 0,
+  //   width: "100vw",
+  //   height: "100vh",
+  //   // position: "absolute",
+  // },
+  headerWrapper: (insetTop: number) => ({
+    paddingTop: insetTop,
+    backgroundColor: "#0e0e0eb3",
+  }),
+  nav: (insetBottom: number) => ({
     backgroundColor: "#131313cc",
     display: "flex",
     // position: "absolute",
@@ -115,8 +155,8 @@ const styles = css.create({
     // paddingRight: 8,
     // paddingTop: 20,
     // paddingBottom: 20,
-    paddingBottom: paddingBottom - 10,
-    paddingTop: paddingBottom - 10,
+    paddingBottom: insetBottom - 10,
+    paddingTop: insetBottom - 10,
     // paddingTop: paddingBottom,
   }),
   navItem: {

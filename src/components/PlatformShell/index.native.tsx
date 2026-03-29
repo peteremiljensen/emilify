@@ -13,9 +13,9 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 export function PlatformShell(props: React.PropsWithChildren<{}>) {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container} edges={["top"]}>
-        {props.children}
-      </SafeAreaView>
+      {/* <SafeAreaView style={styles.container} edges={["top"]}> */}
+      {props.children}
+      {/* </SafeAreaView> */}
     </SafeAreaProvider>
   );
 }
