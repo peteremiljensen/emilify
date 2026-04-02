@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { html, css } from "react-strict-dom";
 import { classes, featuredClass } from "@/data/mockData";
 import { useClassSchedule } from "@/hooks/use-class-schedule";
@@ -8,6 +8,7 @@ import { FeaturedCard } from "./FeaturedCard";
 import { ScrollView, View } from "react-native";
 import { colors } from "@/tokens.css";
 import { useHeaderHeight } from "@/contexts/HeaderHeightContext";
+import { useHeaderContent } from "@/contexts/HeaderContentContext";
 // import { BottomNav } from "./BottomNav";
 
 const styles = css.create({
@@ -18,23 +19,18 @@ const styles = css.create({
     minHeight: "100vh",
     width: "100vw",
   },
-  scrollContent: (heroHeight: number) => ({
+  scrollContent: {
     display: "flex",
     flexDirection: "column",
-    marginTop: heroHeight + 20,
-    paddingBottom: 100,
-  }),
-  heroSection: (headerHeight: number) => ({
-    position: "absolute",
-    width: "100%",
-    // height: 100,
-    zIndex: 99,
-    // backgroundColor: "#0e0e0e",
-    top: headerHeight + 10,
-    overflow: "visible",
+    // marginTop: 20,
+    paddingBottom: 10,
+  },
+  heroContent: {
+    backgroundColor: "#0e0e0eb3",
     paddingLeft: 0,
-    paddingRight: 24,
-  }),
+    paddingRight: 0,
+    paddingBottom: 10,
+  },
   heroTitle: {
     fontFamily: "Space Grotesk",
     fontSize: 56,
@@ -69,31 +65,29 @@ const styles = css.create({
 export const ClassScheduleScreen: React.FC = () => {
   const { selectedDay, onDayPress, onBook, onReserve } = useClassSchedule();
   const { headerHeight } = useHeaderHeight();
+  const { setHeaderContent } = useHeaderContent();
 
   const firstHalf = classes.slice(0, 2);
   const secondHalf = classes.slice(2);
 
-  const [heroHeight, setHeroHeight] = useState(0);
-  console.log("heroHeight", heroHeight);
+  useEffect(() => {
+    setHeaderContent(
+      <html.section style={styles.heroContent}>
+        <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
+      </html.section>,
+    );
+    return () => setHeaderContent(null);
+  }, [selectedDay, onDayPress, setHeaderContent]);
 
   return (
     // <ScrollView style={{ backgroundColor: colors.background }}>
     <>
-      <html.section style={styles.heroSection(headerHeight)}>
-        <View
-          onLayout={(e) => {
-            setHeroHeight(e.nativeEvent.layout.height);
-          }}
-        >
-          <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
-        </View>
-      </html.section>
       <ScrollView
         style={{ paddingTop: headerHeight + 20, width: "100%" }}
         showsVerticalScrollIndicator={false}
       >
         <html.div style={styles.screen}>
-          <html.div style={styles.scrollContent(heroHeight)}>
+          <html.div style={styles.scrollContent}>
             <html.div style={styles.classFeed}>
               {firstHalf.map((cls) => (
                 <ClassItem key={cls.id} classData={cls} onBook={onBook} />

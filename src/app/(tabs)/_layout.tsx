@@ -7,6 +7,7 @@ import {
   HeaderHeightProvider,
   useHeaderHeight,
 } from "@/contexts/HeaderHeightContext";
+import { HeaderContentProvider, useHeaderContent } from "@/contexts/HeaderContentContext";
 import { useEffect, useRef } from "react";
 import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -37,9 +38,11 @@ function AnimatedTabScreen({
 
 export default function Layout() {
   return (
-    <HeaderHeightProvider>
-      <TabsContent />
-    </HeaderHeightProvider>
+    <HeaderContentProvider>
+      <HeaderHeightProvider>
+        <TabsContent />
+      </HeaderHeightProvider>
+    </HeaderContentProvider>
   );
 }
 
@@ -48,6 +51,7 @@ function TabsContent() {
   const path = usePathname();
   const targetRef = useRef<View | null>(null);
   const { onHeaderLayout } = useHeaderHeight();
+  const { headerContent } = useHeaderContent();
 
   return (
     <>
@@ -99,6 +103,7 @@ function TabsContent() {
             <html.div style={styles.headerWrapper(insets.top)}>
               <Header />
             </html.div>
+            {headerContent}
           </View>
         </BlurView>
 
