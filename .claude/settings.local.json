@@ -4,7 +4,8 @@
       "mcp__stitch__list_projects",
       "mcp__stitch__list_screens",
       "Skill(react-components)",
-      "mcp__stitch__get_screen"
+      "mcp__stitch__get_screen",
+      "WebFetch(domain:contribution.usercontent.google.com)"
     ]
   }
 }

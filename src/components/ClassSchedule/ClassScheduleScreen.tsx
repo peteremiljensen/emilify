@@ -9,6 +9,7 @@ import { ScrollView, View } from "react-native";
 import { colors } from "@/tokens.css";
 import { useHeaderHeight } from "@/contexts/HeaderHeightContext";
 import { useHeaderContent } from "@/contexts/HeaderContentContext";
+import { useIsFocused } from "@react-navigation/native";
 // import { BottomNav } from "./BottomNav";
 
 const styles = css.create({
@@ -66,18 +67,23 @@ export const ClassScheduleScreen: React.FC = () => {
   const { selectedDay, onDayPress, onBook, onReserve } = useClassSchedule();
   const { headerHeight } = useHeaderHeight();
   const { setHeaderContent } = useHeaderContent();
+  const isFocused = useIsFocused();
 
   const firstHalf = classes.slice(0, 2);
   const secondHalf = classes.slice(2);
 
   useEffect(() => {
-    setHeaderContent(
-      <html.section style={styles.heroContent}>
-        <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
-      </html.section>,
-    );
+    if (isFocused) {
+      setHeaderContent(
+        <html.section style={styles.heroContent}>
+          <DayFilter selectedDay={selectedDay} onDayPress={onDayPress} />
+        </html.section>,
+      );
+    } else {
+      setHeaderContent(null);
+    }
     return () => setHeaderContent(null);
-  }, [selectedDay, onDayPress, setHeaderContent]);
+  }, [isFocused, selectedDay, onDayPress, setHeaderContent]);
 
   return (
     // <ScrollView style={{ backgroundColor: colors.background }}>

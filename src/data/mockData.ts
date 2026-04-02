@@ -28,7 +28,14 @@ export interface NavItem {
   readonly label: string;
 }
 
-export const dayFilters = ["Today", "Mon", "Tue", "Wed", "Thu"] as const;
+export const dayFilters = [
+  { label: "Today", date: 12 },
+  { label: "Mon", date: 13 },
+  { label: "Tue", date: 14 },
+  { label: "Wed", date: 15 },
+  { label: "Thu", date: 16 },
+  { label: "Fri", date: 17 },
+] as const;
 
 export const classes: readonly ClassData[] = [
   {
