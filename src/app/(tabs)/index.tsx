@@ -1,10 +1,6 @@
 import * as React from "react";
-import { ClassScheduleScreen } from "../../components/ClassSchedule/ClassScheduleScreen";
-import { ScrollView } from "react-native";
-import { useHeaderHeight } from "@/contexts/HeaderHeightContext";
+import { HomeDashboardScreen } from "@/components/HomeDashboard/HomeDashboardScreen";
 
-// import { registerRootComponent } from "expo";
-
-export default function App() {
-  return <ClassScheduleScreen />;
+export default function Tab() {
+  return <HomeDashboardScreen />;
 }

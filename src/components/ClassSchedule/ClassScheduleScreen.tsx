@@ -27,7 +27,7 @@ const styles = css.create({
     paddingBottom: 10,
   },
   heroContent: {
-    backgroundColor: "#0e0e0eb3",
+    // backgroundColor: "#0e0e0eb3",
     paddingLeft: 0,
     paddingRight: 0,
     paddingBottom: 10,

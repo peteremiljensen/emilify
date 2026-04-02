@@ -7,7 +7,10 @@ import {
   HeaderHeightProvider,
   useHeaderHeight,
 } from "@/contexts/HeaderHeightContext";
-import { HeaderContentProvider, useHeaderContent } from "@/contexts/HeaderContentContext";
+import {
+  HeaderContentProvider,
+  useHeaderContent,
+} from "@/contexts/HeaderContentContext";
 import { useEffect, useRef } from "react";
 import { Animated, Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -102,8 +105,8 @@ function TabsContent() {
           <View>
             <html.div style={styles.headerWrapper(insets.top)}>
               <Header />
+              {headerContent}
             </html.div>
-            {headerContent}
           </View>
         </BlurView>
 
@@ -273,10 +276,10 @@ const styles = css.create({
   // },
   headerWrapper: (insetTop: number) => ({
     paddingTop: insetTop,
-    backgroundColor: "#0e0e0eb3",
+    // backgroundColor: "#0e0e0eb3",
   }),
   nav: (insetBottom: number) => ({
-    backgroundColor: "#131313cc",
+    // backgroundColor: "#131313cc",
     display: "flex",
     // position: "absolute",
     // bottom: 0,

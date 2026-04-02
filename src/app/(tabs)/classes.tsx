@@ -1,12 +1,10 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { ClassScheduleScreen } from "../../components/ClassSchedule/ClassScheduleScreen";
+import { ScrollView } from "react-native";
+import { useHeaderHeight } from "@/contexts/HeaderHeightContext";
 
 // import { registerRootComponent } from "expo";
 
-export default function Tab() {
-  return (
-    <View>
-      <Text>Test</Text>
-    </View>
-  );
+export default function App() {
+  return <ClassScheduleScreen />;
 }

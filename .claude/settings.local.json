@@ -5,7 +5,8 @@
       "mcp__stitch__list_screens",
       "Skill(react-components)",
       "mcp__stitch__get_screen",
-      "WebFetch(domain:contribution.usercontent.google.com)"
+      "WebFetch(domain:contribution.usercontent.google.com)",
+      "Bash(curl -sL \"https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzZiZTU1NzAwNzk5MTQ4M2E5ZDViODMwNTcyMjRkMTFiEgsSBxDqvIj__hQYAZIBIwoKcHJvamVjdF9pZBIVQhM2MzkyMDY1NDk4NDMyNTI5NTYx&filename=&opi=89354086\")"
     ]
   }
 }
