@@ -89,7 +89,7 @@ export const ClassScheduleScreen: React.FC = () => {
         </View>
       </html.section>
       <ScrollView
-        style={{ paddingTop: headerHeight, width: "100%" }}
+        style={{ paddingTop: headerHeight + 20, width: "100%" }}
         showsVerticalScrollIndicator={false}
       >
         <html.div style={styles.screen}>
